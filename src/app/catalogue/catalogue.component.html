@@ -1,32 +1,86 @@
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>1mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>1at</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>1witter</td>
-      </tr>
-    </tbody>
-  </table>
+<div>
+  <div class="title">
+    <div class="title-name">
+      name
+    </div>
+    <div class="title-icon">
+      <a class="btn-icon">
+        <i class="bi bi-x"></i>
+      </a>
+    </div>
+  </div>
 
+  <div class="select">
+    <div>
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Fulfillment facility: All</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
 
-  <button type="button" class="btn btn-primary">Primary</button>
+    <div>
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Size: All</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+     
+    <div>
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Color: All</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="table-full">
+    <table class="table">
+      <thead>
+        <tr>
+          <th  rowspan="2">Fulfillment facility</th>
+          <th  rowspan="2">Size</th>
+          <th  rowspan="2">Color</th>
+          <th  rowspan="2">SKU</th>
+          <th  rowspan="2">Base cost</th>
+          <th  rowspan="2">2nd price</th>
+          <th  colspan="4">Shipping fee</th>
+        </tr>
+        <tr>
+          <td>US</td>
+          <td>US addition</td>
+          <td>WW</td>
+          <td>WW addition</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <img src="https://d1ud88wu9m1k4s.cloudfront.net/icons/ic_Tier_Standard_24x24.svg">
+            <span>
+              Denali
+            </span>
+          </td>
+          <td>S</td>
+          <td>White</td>
+          <td>USG5000-White-S</td>
+          <td>$6.75</td>
+          <td>$4.50</td>
+          <td>$5.49</td>
+          <td>$2.99</td>
+          <td>$10.99</td>
+          <td>$4.99</td>
+        </tr>    
+        
+ 
+        
+      </tbody>
+    </table>
+  </div>
+ 
+</div>
