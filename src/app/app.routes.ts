@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
-import { CatalogueComponent } from './catalogue/catalogue.component';
+import { CatalogueComponent } from './pages/catalogue/catalogue.component';
+
 
 export const routes: Routes = [
     { path: '', redirectTo: '/catalogue', pathMatch: 'full' },
