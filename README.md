@@ -2,7 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.2.
 
-## install packages
+## Qpen
+
+After downloading the project open it with visual studio code and open terminal and do the next step.
+
+## Install packages
 
 Run `npm i` or `npm install`
 
