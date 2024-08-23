@@ -19,7 +19,7 @@
     margin-right: 20px;
 }
 
-.bi {
+.iconx {
     color: #9a9898;
     font-size: 1.5rem;
     border: 1px solid #9a9898;
@@ -66,3 +66,72 @@
 .table thead th[colspan="4"] {
     text-align: center;
 }
+
+
+/*css select1*/
+.custom-select {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  .select-selected {
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    line-height: 1.5;
+    font-size: 1rem;
+    color: #495057;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+  
+.down{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+  
+  .select-items {
+    position: absolute;
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    width: 100%;
+    z-index: 99;
+    max-height: 180px;
+    overflow-y: auto;
+  }
+  
+  .select-items.show {
+    display: block;
+  }
+  
+  .select-option {
+    padding: 0.375rem 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: #495057;
+  }
+  
+  .select-option:hover {
+    background-color: #e9ecef;
+  }
+  
+  .select-option-image {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 50%;
+  }
+  
+  .select-hide {
+    display: none; 
+  }
+  
+  /*css select1*/

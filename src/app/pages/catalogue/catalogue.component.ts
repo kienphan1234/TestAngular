@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { BaseSku, catalogue, Option, OptionValue, ProductData } from '../../core/models/catalogue';
 import { CatalogueService } from '../../core/services/catalogue.service';
 import { CommonModule } from '@angular/common';
@@ -19,6 +19,8 @@ export class CatalogueComponent {
   filteredList: any[] = [];
   selectedColor: string | null = "";
   selectedSize: string | null = "";
+  selectedOption: string | null = null;
+  isSelectOpen = false;
   constructor(private productService: CatalogueService) { }
 
   ngOnInit(): void {
@@ -50,6 +52,16 @@ export class CatalogueComponent {
     }
   }
 
+  filterByfacility(): void {
+    if (this.selectedOption) {
+      this.filteredList = this.filteredList.filter(item => item.location_name === this.selectedOption);
+    }
+  }
+
+  filterByfacilityOnly(): void {
+    this.selectedOption = null;
+    this.filterByfacility()
+  }
   filterByColorOnly(): void {
     this.selectedSize = null; // Bỏ lọc theo kích thước
     this.filterByColor();
@@ -62,11 +74,35 @@ export class CatalogueComponent {
 
   filterList(): void {
     this.filterByColor();
-    this.filterBySize();   
+    this.filterBySize();  
+    this.filterByfacility() 
   }
 
   onCategoryChange(): void {
     this.filterList();
   }
 
+
+  toggleSelect() {
+    this.isSelectOpen = !this.isSelectOpen;
+  }
+
+  selectOption(sku: any) {
+    this.selectedOption = sku ? sku.location_name : null;
+    const selectItems = document.querySelector('.select-items');
+    if (selectItems) {
+      selectItems.classList.add('select-hide');
+    }else{
+      this.isSelectOpen = false; 
+    }
+    this.filterList();
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    const selectElement = document.querySelector('.custom-select');
+    if (selectElement && !selectElement.contains(event.target as Node)) {
+      this.isSelectOpen = false; // Close the dropdown if clicked outside
+    }
+  }
 }

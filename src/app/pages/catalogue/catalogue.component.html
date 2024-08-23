@@ -5,22 +5,35 @@
     </div>
     <div class="title-icon">
       <a class="btn-icon">
-        <i class="bi bi-x"></i>
+        <i class="bi bi-x iconx"></i>
       </a>
     </div>
   </div>
 
   <div class="select">
-    <div *ngIf="productData?.base_sku && productData?.base_sku?.length">
-      <select class="form-select" aria-label="Default select example">
-        <option value="" selected>Fulfillment facility: All</option>
-        <option *ngFor="let sku of ((productData?.base_sku ?? []) | uniqueLocation)" [value]="sku.id">
-          {{ sku.location_name }}
-        </option>
-      </select>
+    
+    <div>
+      <div class="custom-select" (click)="toggleSelect()">
+        <div class="select-selected">
+          {{ selectedOption ? 'Fulfillment facility: ' + selectedOption : 'Fulfillment facility: All' }}
+          <i class="bi bi-chevron-down down"></i>
+        </div>
+        <div class="select-items" [ngClass]="{'select-hide': !isSelectOpen}">
+          <div class="select-option" (click)="selectOption(null)">
+            <img src="https://d1ud88wu9m1k4s.cloudfront.net/icons/ic_Tier_All_Location_24x24.svg" alt="All" class="select-option-image">
+            Fulfillment facility: All
+          </div>
+          <div class="select-option" *ngFor="let sku of (productData?.base_sku ?? []) | uniqueLocation" (click)="selectOption(sku)"
+           (change)="onCategoryChange()">
+            <img [src]="sku.location_icon" alt="{{ sku.location_name }}" class="select-option-image">
+            {{ sku.location_name }}
+          </div>
+        </div>
+      </div>
     </div>
+    
 
-
+    
     <div>
       <select class="form-select" aria-label="Default select example" [(ngModel)]="selectedSize" (change)="onCategoryChange()">
         <option value="" selected>Size: All</option>
