@@ -62,7 +62,7 @@
       <tbody *ngIf="productData?.base_sku && productData?.base_sku?.length">
         <tr *ngFor="let sku of productData?.base_sku">
           <td>
-            <img src="https://d1ud88wu9m1k4s.cloudfront.net/icons/ic_Tier_Standard_24x24.svg">
+            <img [src]="sku.location_icon">
             <span>
               {{ sku.location_name }}
             </span>
