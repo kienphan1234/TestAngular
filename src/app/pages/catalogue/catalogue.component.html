@@ -12,30 +12,34 @@
 
   <div class="select">
     <div *ngIf="productData?.base_sku && productData?.base_sku?.length">
-      <select class="form-select" aria-label="Default select example">  
+      <select class="form-select" aria-label="Default select example">
         <option value="" selected>Fulfillment facility: All</option>
-        <option *ngFor="let sku of ((productData?.base_sku ?? []) | uniqueLocation)" [value]="sku.id">         
+        <option *ngFor="let sku of ((productData?.base_sku ?? []) | uniqueLocation)" [value]="sku.id">
           {{ sku.location_name }}
         </option>
       </select>
     </div>
-    
+
 
     <div>
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Size: All</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select class="form-select" aria-label="Default select example" [(ngModel)]="selectedSize" (change)="onCategoryChange()">
+        <option value="" selected>Size: All</option>
+        <ng-container *ngFor="let option of sizeOptions">
+          <option *ngFor="let value of option.values" [value]="value.id">
+            {{ value.name }}
+          </option>
+        </ng-container>
       </select>
     </div>
 
     <div>
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Color: All</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select class="form-select" aria-label="Default select example" [(ngModel)]="selectedColor" (change)="onCategoryChange()">
+        <option value="" selected>Color: All</option>
+        <ng-container *ngFor="let option of sizeOptions1">
+          <option *ngFor="let value of option.values" [value]="value.id">
+            {{ value.name }}
+          </option>
+        </ng-container>
       </select>
     </div>
   </div>
@@ -59,8 +63,8 @@
           <td>WW addition</td>
         </tr>
       </thead>
-      <tbody *ngIf="productData?.base_sku && productData?.base_sku?.length">
-        <tr *ngFor="let sku of productData?.base_sku">
+      <tbody>
+        <tr *ngFor="let sku of filteredList">
           <td>
             <img [src]="sku.location_icon">
             <span>
