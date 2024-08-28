@@ -17,8 +17,8 @@ export class CatalogueComponent {
   sizeOptions: any[] = [];
   sizeOptions1: any[] = [];
   filteredList: any[] = [];
-  selectedColor: string | null = "";
-  selectedSize: string | null = "";
+  selectedColor: string[] = ['ALL'];
+  selectedSize: string[] = ['ALL'];
   selectedOption: string | null = null;
   isSelectOpen = false;
   constructor(private productService: CatalogueService) { }
@@ -34,21 +34,22 @@ export class CatalogueComponent {
         this.sizeOptions = this.productData?.options.filter(option => option.name === 'size');
         this.sizeOptions1 = this.productData?.options.filter(option => option.name === 'color');
         this.filteredList = this.productData?.base_sku ?? [];
+        this.filterList();
       }
     });
   }
   
   filterByColor(): void {
-    if (this.selectedColor) {
-      this.filteredList = this.productData?.base_sku?.filter(item => item.color_id === this.selectedColor) ?? [];
+    if (this.selectedColor && !this.selectedColor.includes('ALL')) {
+      this.filteredList = this.filteredList.filter(item => this.selectedColor.includes(item.color_id.toString()));
     } else {
       this.filteredList = this.productData?.base_sku ?? [];
     }
   }
   
   filterBySize(): void {
-    if (this.selectedSize) {
-      this.filteredList = this.filteredList.filter(item => item.size_id === this.selectedSize);
+    if (this.selectedSize && !this.selectedSize.includes('ALL')) {
+      this.filteredList = this.filteredList.filter(item => this.selectedSize.includes(item.size_id.toString()));
     }
   }
 
@@ -63,16 +64,19 @@ export class CatalogueComponent {
     this.filterByfacility()
   }
   filterByColorOnly(): void {
-    this.selectedSize = null; // Bỏ lọc theo kích thước
+    this.selectedSize = ['ALL']; 
+    this.filteredList = this.productData?.base_sku ?? [];
     this.filterByColor();
   }
   
   filterBySizeOnly(): void {
-    this.selectedColor = null; // Bỏ lọc theo màu sắc
+    this.selectedColor = ['ALL']; 
+    this.filteredList = this.productData?.base_sku ?? [];
     this.filterBySize();
   }
 
   filterList(): void {
+    this.filteredList = this.productData?.base_sku ?? [];
     this.filterByColor();
     this.filterBySize();  
     this.filterByfacility() 
@@ -102,7 +106,7 @@ export class CatalogueComponent {
   onClick(event: MouseEvent) {
     const selectElement = document.querySelector('.custom-select');
     if (selectElement && !selectElement.contains(event.target as Node)) {
-      this.isSelectOpen = false; // Close the dropdown if clicked outside
+      this.isSelectOpen = false;
     }
   }
 }

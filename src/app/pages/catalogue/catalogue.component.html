@@ -9,9 +9,7 @@
       </a>
     </div>
   </div>
-
-  <div class="select">
-    
+  <div class="select"> 
     <div>
       <div class="custom-select" (click)="toggleSelect()">
         <div class="select-selected">
@@ -31,12 +29,9 @@
         </div>
       </div>
     </div>
-    
-
-    
     <div>
-      <select class="form-select" aria-label="Default select example" [(ngModel)]="selectedSize" (change)="onCategoryChange()">
-        <option value="" selected>Size: All</option>
+      <select class="form-select" aria-label="Default select example" [(ngModel)]="selectedSize" (change)="onCategoryChange()" multiple>
+        <option [value]="'ALL'" selected>Size: All</option>
         <ng-container *ngFor="let option of sizeOptions">
           <option *ngFor="let value of option.values" [value]="value.id">
             {{ value.name }}
@@ -44,10 +39,9 @@
         </ng-container>
       </select>
     </div>
-
     <div>
-      <select class="form-select" aria-label="Default select example" [(ngModel)]="selectedColor" (change)="onCategoryChange()">
-        <option value="" selected>Color: All</option>
+      <select class="form-select" aria-label="Default select example" [(ngModel)]="selectedColor" (change)="onCategoryChange()" multiple>
+        <option [value]="'ALL'" selected>Color: All</option>
         <ng-container *ngFor="let option of sizeOptions1">
           <option *ngFor="let value of option.values" [value]="value.id">
             {{ value.name }}
@@ -56,7 +50,6 @@
       </select>
     </div>
   </div>
-
   <div class="table-full">
     <table class="table">
       <thead>
@@ -96,5 +89,4 @@
       </tbody>
     </table>
   </div>
-
 </div>
