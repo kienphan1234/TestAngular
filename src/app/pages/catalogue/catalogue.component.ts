@@ -4,11 +4,11 @@ import { CatalogueService } from '../../core/services/catalogue.service';
 import { CommonModule } from '@angular/common';
 import { UniqueLocationPipe } from "../../core/pipe/unique-location.pipe";
 import { FormsModule } from '@angular/forms';
-
+import { TableModule } from 'primeng/table';
 @Component({
   selector: 'app-catalogue',
   standalone: true,
-  imports: [CommonModule, UniqueLocationPipe,FormsModule],
+  imports: [CommonModule, UniqueLocationPipe,FormsModule,TableModule],
   templateUrl: './catalogue.component.html',
   styleUrl: './catalogue.component.css'
 })
@@ -21,11 +21,15 @@ export class CatalogueComponent {
   selectedSize: string[] = ['ALL'];
   selectedOption: string | null = null;
   isSelectOpen = false;
+  showBaseCost: boolean = true;
+  showSecondPrice: boolean = true;
   constructor(private productService: CatalogueService) { }
 
   ngOnInit(): void {
     this.loadProductData();
+    
   }
+  
 
   loadProductData(): void {
     this.productService.getProductData().subscribe({
@@ -37,6 +41,7 @@ export class CatalogueComponent {
         this.filterList();
       }
     });
+    
   }
   
   filterByColor(): void {
@@ -109,4 +114,6 @@ export class CatalogueComponent {
       this.isSelectOpen = false;
     }
   }
+
+  
 }

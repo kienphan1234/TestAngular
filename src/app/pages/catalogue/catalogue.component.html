@@ -49,44 +49,76 @@
         </ng-container>
       </select>
     </div>
+    <div class="check">
+      <label>
+        <input type="checkbox" [(ngModel)]="showBaseCost"> Show Base Cost
+      </label>
+      <label>
+        <input type="checkbox" [(ngModel)]="showSecondPrice"> Show 2nd Price
+      </label>
+      <!-- Add more checkboxes for other columns if needed -->
+    </div>
   </div>
   <div class="table-full">
-    <table class="table">
-      <thead>
-        <tr>
-          <th rowspan="2">Fulfillment facility</th>
-          <th rowspan="2">Size</th>
-          <th rowspan="2">Color</th>
-          <th rowspan="2">SKU</th>
-          <th rowspan="2">Base cost</th>
-          <th rowspan="2">2nd price</th>
-          <th colspan="4">Shipping fee</th>
-        </tr>
-        <tr>
-          <td>US</td>
-          <td>US addition</td>
-          <td>WW</td>
-          <td>WW addition</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let sku of filteredList">
-          <td>
-            <img [src]="sku.location_icon">
-            <span>
-              {{ sku.location_name }}
-            </span>
-          </td>
-          <td>{{ sku.size_name }}</td>
-          <td>{{ sku.color_name }}</td>
-          <td>{{ sku.sku }}</td>
-          <td>${{ sku.base_cost }}</td>
-          <td>${{ sku.second_side_price }}</td>
-          <td>${{ sku.shipping_cost_us }}</td>
-          <td>${{ sku.shipping_adding_us }}</td>
-          <td>${{ sku.shipping_cost_ww }}</td>
-          <td>${{ sku.shipping_adding_ww }}</td>
-      </tbody>
-    </table>
+    <div class="card">
+      <p-table [value]="filteredList" class="table">
+          <ng-template pTemplate="header">
+            <tr>
+              <th rowspan="2" pSortableColumn="location_name" >Fulfillment facility
+                <p-sortIcon field="location_name" />
+              </th>
+              <th rowspan="2" pSortableColumn="size_name" >Size
+                <p-sortIcon field="size_name" />
+              </th>
+              <th rowspan="2" pSortableColumn="color_name" >Color
+                <p-sortIcon field="color_name" />
+              </th>
+              <th rowspan="2" pSortableColumn="sku" >SKU
+                <p-sortIcon field="sku" />
+              </th>
+              <th *ngIf="showBaseCost" rowspan="2" pSortableColumn="base_cost">Base cost
+                <p-sortIcon field="base_cost"  />
+              </th>
+              <th *ngIf="showSecondPrice" rowspan="2" pSortableColumn="second_side_price" >2nd price
+                <p-sortIcon field="second_side_price" />
+              </th>
+              <th class="center" colspan="4">Shipping fee </th>
+            </tr>
+            <tr>
+              <td pSortableColumn="shipping_cost_us" >US
+                <p-sortIcon field="shipping_cost_us" />
+              </td>
+              <td pSortableColumn="shipping_adding_us" >US addition
+                <p-sortIcon field="shipping_adding_us" />
+              </td>
+              <td pSortableColumn="shipping_cost_ww" >WW
+                <p-sortIcon field="shipping_cost_ww" />
+              </td>
+              <td pSortableColumn="shipping_adding_ww">WW addition
+                <p-sortIcon field="shipping_adding_ww" />
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-sku>
+              <tr>
+                <td>
+                  <img [src]="sku.location_icon">
+                  <span>
+                    {{ sku.location_name }}
+                  </span>
+                </td>
+                <td>{{ sku.size_name }}</td>
+                <td>{{ sku.color_name }}</td>
+                <td>{{ sku.sku }}</td>
+                <td *ngIf="showBaseCost">${{ sku.base_cost }}</td>
+                <td *ngIf="showSecondPrice">${{ sku.second_side_price }}</td>
+                <td>${{ sku.shipping_cost_us }}</td>
+                <td>${{ sku.shipping_adding_us }}</td>
+                <td>${{ sku.shipping_cost_ww }}</td>
+                <td>${{ sku.shipping_adding_ww }}</td>
+              </tr>
+          </ng-template>
+      </p-table>
+  </div>
   </div>
 </div>
