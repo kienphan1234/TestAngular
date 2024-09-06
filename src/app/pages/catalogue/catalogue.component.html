@@ -60,7 +60,7 @@
         <ul class="dropdown-menu" [class.show]="dropdownOpen1" aria-labelledby="dropdownMenuButton">
           <li *ngFor="let option of sizeOptions1">
             <div class="form-check"  *ngFor="let value of option.values">
-              <input 
+              <input
                 type="checkbox" 
                 class="form-check-input" 
                 [value]="value.id" 
@@ -81,32 +81,46 @@
       </button>
       <ul  class="dropdown-menu" [class.show]="dropdownOpen2" aria-labelledby="dropdownMenuButton">
         <li class="list-group-item">
-          <input class="form-check-input me-1"  [(ngModel)]="showname"  type="checkbox" value="" aria-label="...">
-           Fulfillment facility
+          <input class="form-check-input me-1" id="checkbox-fulfillment"  [(ngModel)]="showname"  type="checkbox" value="" aria-label="...">
+          <label for="checkbox-fulfillment">
+            Fulfillment facility
+          </label>
         </li>
         <li class="list-group-item">
-          <input class="form-check-input me-1"  [(ngModel)]="showsize"  type="checkbox" value="" aria-label="...">
+          <input class="form-check-input me-1" id="checkbox-size"  [(ngModel)]="showsize"  type="checkbox" value="" aria-label="...">
+          <label for="checkbox-size">
           Show Size
+          </label>
         </li>
         <li class="list-group-item">
-          <input class="form-check-input me-1"  [(ngModel)]="showcolor"  type="checkbox" value="" aria-label="...">
-          Show Color
+          <input class="form-check-input me-1" id="checkbox-color" [(ngModel)]="showcolor"  type="checkbox" value="" aria-label="...">
+          <label for="checkbox-size">
+            Show Color
+          </label>
         </li>
         <li class="list-group-item">
-          <input class="form-check-input me-1"  [(ngModel)]="showsku"  type="checkbox" value="" aria-label="...">
+          <input class="form-check-input me-1" id="checkbox-sku"  [(ngModel)]="showsku"  type="checkbox" value="" aria-label="...">
+          <label for="checkbox-sku">
           Show SKU
+        </label>
         </li>
         <li class="list-group-item">
-          <input class="form-check-input me-1"  [(ngModel)]="showBaseCost"  type="checkbox" value="" aria-label="...">
+          <input class="form-check-input me-1" id="checkbox-cost"  [(ngModel)]="showBaseCost"  type="checkbox" value="" aria-label="...">
+          <label for="checkbox-cost">
           Show Base cost
+        </label>
         </li>
         <li class="list-group-item">
-          <input class="form-check-input me-1"  [(ngModel)]="showSecondPrice"  type="checkbox" value="" aria-label="...">
+          <input class="form-check-input me-1" id="checkbox-price"  [(ngModel)]="showSecondPrice"  type="checkbox" value="" aria-label="...">
+          <label for="checkbox-price">
           Show 2nd price
+        </label>
         </li>
         <li class="list-group-item">
-          <input class="form-check-input me-1"  [(ngModel)]="showship"  type="checkbox" value="" aria-label="...">
+          <input class="form-check-input me-1" id="checkbox-fee"   [(ngModel)]="showship"  type="checkbox" value="" aria-label="...">
+          <label for="checkbox-fee">
           Show Shipping fee
+        </label>
         </li>
       </ul>
     </div>
