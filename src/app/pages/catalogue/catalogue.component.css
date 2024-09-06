@@ -47,10 +47,7 @@
 
 
 .table-full{
-    margin-left: 15px; 
-    max-height: calc(100vh - 15.1rem);
-    overflow-x: auto;
-    margin-right: 15px; 
+  margin-right: 15px; 
 }
 .table, th, td{
     border: 1px solid #667085;

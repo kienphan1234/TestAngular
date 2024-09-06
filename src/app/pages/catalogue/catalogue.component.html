@@ -77,7 +77,7 @@
     
     <div class="dropdown">
       <button class="btn  dropdown-toggle size" type="button" id="dropdownMenuButton" (click)="toggleDropdown2()">
-        Select Color
+        Select header
       </button>
       <ul  class="dropdown-menu" [class.show]="dropdownOpen2" aria-labelledby="dropdownMenuButton">
         <li class="list-group-item">
@@ -114,8 +114,10 @@
   </div>
   <div class="table-full">
     <div class="card">
-      <p-table [value]="filteredList" class="table">
-          <ng-template pTemplate="header">
+      <p-table [value]="filteredList" [scrollable]="true" 
+      scrollHeight="600px" 
+      [scrollable]="true" class="table">
+          <ng-template pTemplate="header" >
             <tr>
               <th *ngIf="showname" rowspan="2" pSortableColumn="location_name" >Fulfillment facility
                 <p-sortIcon field="location_name" />
