@@ -17,12 +17,20 @@ export class CatalogueComponent {
   sizeOptions: any[] = [];
   sizeOptions1: any[] = [];
   filteredList: any[] = [];
-  selectedColor: string[] = ['ALL'];
-  selectedSize: string[] = ['ALL'];
+  selectedColor: string[] = [];
+  selectedSize: string[] = [];
   selectedOption: string | null = null;
   isSelectOpen = false;
   showBaseCost: boolean = true;
   showSecondPrice: boolean = true;
+  showname: boolean = true;
+  showsize: boolean = true;
+  showcolor: boolean = true;
+  showsku: boolean = true;
+  showship: boolean = true;
+  dropdownOpen: boolean = false;
+  dropdownOpen1: boolean = false; 
+  dropdownOpen2: boolean = false;
   constructor(private productService: CatalogueService) { }
 
   ngOnInit(): void {
@@ -44,8 +52,9 @@ export class CatalogueComponent {
     
   }
   
+ 
   filterByColor(): void {
-    if (this.selectedColor && !this.selectedColor.includes('ALL')) {
+    if (this.selectedColor && this.selectedColor.length  != 0) {
       this.filteredList = this.filteredList.filter(item => this.selectedColor.includes(item.color_id.toString()));
     } else {
       this.filteredList = this.productData?.base_sku ?? [];
@@ -53,7 +62,7 @@ export class CatalogueComponent {
   }
   
   filterBySize(): void {
-    if (this.selectedSize && !this.selectedSize.includes('ALL')) {
+    if (this.selectedSize && this.selectedSize.length != 0) {
       this.filteredList = this.filteredList.filter(item => this.selectedSize.includes(item.size_id.toString()));
     }
   }
@@ -69,13 +78,13 @@ export class CatalogueComponent {
     this.filterByfacility()
   }
   filterByColorOnly(): void {
-    this.selectedSize = ['ALL']; 
+    this.selectedSize = []; 
     this.filteredList = this.productData?.base_sku ?? [];
     this.filterByColor();
   }
   
   filterBySizeOnly(): void {
-    this.selectedColor = ['ALL']; 
+    this.selectedColor = []; 
     this.filteredList = this.productData?.base_sku ?? [];
     this.filterBySize();
   }
@@ -114,6 +123,35 @@ export class CatalogueComponent {
       this.isSelectOpen = false;
     }
   }
-
-  
+ 
+ toggleDropdown() {
+      this.dropdownOpen = !this.dropdownOpen;
+    }
+    toggleDropdown1() {
+      this.dropdownOpen1 = !this.dropdownOpen1;
+    }
+    toggleDropdown2() {
+      this.dropdownOpen2 = !this.dropdownOpen2;
+    }
+onCheckboxChange(event: Event, size: string) {
+  const checkbox = event.target as HTMLInputElement;
+  if (checkbox.checked) {
+    this.selectedSize.push(size); 
+  } else {
+    this.selectedSize = this.selectedSize.filter(item => item !== size); 
+  }
+  this.onCategoryChange();
 }
+onCheckboxChange2(event: Event, color: string) {
+  const checkbox = event.target as HTMLInputElement;
+  if (checkbox.checked) { 
+    this.selectedColor.push(color);
+  } else {; 
+    this.selectedColor = this.selectedColor.filter(item => item !== color); 
+  }
+  this.onCategoryChange();
+}
+
+
+  }
+

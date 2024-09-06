@@ -36,7 +36,7 @@
 
 .select{
     display: flex;
-    gap: 10px;
+    gap: 70px;
     margin-left: 15px;
     margin-bottom: 20px;
 }
@@ -138,4 +138,15 @@
 
   .check>label{
     margin: 30px;
+  }
+
+  .dropdown-menu {
+    max-height: 200px; /* Hoặc kích thước tùy chỉnh của bạn */
+    overflow-y: auto;
+  }
+  .size{
+    border: 1px solid black;
+  }
+  .select-color{
+     margin: 50px;
   }
