@@ -19,8 +19,7 @@ export class CatalogueComponent {
   filteredList: any[] = [];
   selectedColor: string[] = [];
   selectedSize: string[] = [];
-  selectedOption: string | null = null;
-  isSelectOpen = false;
+  selectedOptionkk: string[] = [];
   showBaseCost: boolean = true;
   showSecondPrice: boolean = true;
   showname: boolean = true;
@@ -31,6 +30,8 @@ export class CatalogueComponent {
   dropdownOpen: boolean = false;
   dropdownOpen1: boolean = false; 
   dropdownOpen2: boolean = false;
+  dropdownOpen3: boolean = false;
+  searchTerm: string = '';
   constructor(private productService: CatalogueService) { }
 
   ngOnInit(): void {
@@ -46,13 +47,13 @@ export class CatalogueComponent {
         this.sizeOptions = this.productData?.options.filter(option => option.name === 'size');
         this.sizeOptions1 = this.productData?.options.filter(option => option.name === 'color');
         this.filteredList = this.productData?.base_sku ?? [];
-        this.filterList();
       }
+      
     });
-    
+   
   }
+
   
- 
   filterByColor(): void {
     if (this.selectedColor && this.selectedColor.length  != 0) {
       this.filteredList = this.filteredList.filter(item => this.selectedColor.includes(item.color_id.toString()));
@@ -68,13 +69,14 @@ export class CatalogueComponent {
   }
 
   filterByfacility(): void {
-    if (this.selectedOption) {
-      this.filteredList = this.filteredList.filter(item => item.location_name === this.selectedOption);
+    if (this.selectedOptionkk && this.selectedOptionkk.length != 0) {
+      this.filteredList = this.filteredList.filter(item => this.selectedOptionkk.includes(item.location_name.toString()));
     }
   }
 
   filterByfacilityOnly(): void {
-    this.selectedOption = null;
+    this.selectedOptionkk = [];
+    this.filteredList = this.productData?.base_sku ?? [];
     this.filterByfacility()
   }
   filterByColorOnly(): void {
@@ -101,38 +103,20 @@ export class CatalogueComponent {
   }
 
 
-  toggleSelect() {
-    this.isSelectOpen = !this.isSelectOpen;
-  }
-
-  selectOption(sku: any) {
-    this.selectedOption = sku ? sku.location_name : null;
-    const selectItems = document.querySelector('.select-items');
-    if (selectItems) {
-      selectItems.classList.add('select-hide');
-    }else{
-      this.isSelectOpen = false; 
-    }
-    this.filterList();
-  }
-
-  @HostListener('document:click', ['$event'])
-  onClick(event: MouseEvent) {
-    const selectElement = document.querySelector('.custom-select');
-    if (selectElement && !selectElement.contains(event.target as Node)) {
-      this.isSelectOpen = false;
-    }
-  }
  
- toggleDropdown() {
+toggleDropdown() {
       this.dropdownOpen = !this.dropdownOpen;
-    }
-    toggleDropdown1() {
+}
+toggleDropdown1() {
       this.dropdownOpen1 = !this.dropdownOpen1;
-    }
-    toggleDropdown2() {
+}
+toggleDropdown2() {
       this.dropdownOpen2 = !this.dropdownOpen2;
-    }
+}
+toggleDropdown3() {
+      this.dropdownOpen3 = !this.dropdownOpen3;
+}
+
 onCheckboxChange(event: Event, size: string) {
   const checkbox = event.target as HTMLInputElement;
   if (checkbox.checked) {
@@ -151,7 +135,34 @@ onCheckboxChange2(event: Event, color: string) {
   }
   this.onCategoryChange();
 }
-
-
+onCheckboxChange3(event: Event, name: string) {
+  const checkbox = event.target as HTMLInputElement;
+  if (checkbox.checked) { 
+    this.selectedOptionkk.push(name);
+  } else {; 
+    this.selectedOptionkk = this.selectedOptionkk.filter(item => item !== name); 
   }
+  this.onCategoryChange();
+}
+
+filterItems() {
+  if (!this.searchTerm.trim()) {
+    this.filteredList = this.productData?.base_sku ?? [];
+    this.onCategoryChange();
+  } else {
+    const searchKeywords = this.searchTerm.toLowerCase().split(' ').filter(Boolean);
+
+    this.filteredList = this.filteredList.filter(item => {
+      const skuLowerCase = item.sku.toLowerCase();
+      return searchKeywords.some(keyword => skuLowerCase.includes(keyword));
+    });
+
+    if (this.filteredList.length === 0) {
+      console.log("404: Không tìm thấy sản phẩm");
+      this.filteredList = [{ sku: 'No products found'}];
+    }
+  }
+}
+
+}
 

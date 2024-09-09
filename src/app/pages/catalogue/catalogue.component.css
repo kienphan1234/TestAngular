@@ -49,16 +49,16 @@
 .table-full{
   margin-right: 15px; 
 }
-.table, th, td{
-    border: 1px solid #667085;
-    border-collapse: collapse;
+.table, th, td, tr{
     color: black;
 }
 
 .table thead th{
   padding-bottom: 20px;
   font-weight: normal; 
+  
 }
+
 
 .center {
     text-align: center;
@@ -138,12 +138,42 @@
   }
 
   .dropdown-menu {
-    max-height: 200px; /* Hoặc kích thước tùy chỉnh của bạn */
+    max-height: 200px; 
+    width: 100%;
     overflow-y: auto;
+  }
+  .dropdown-menu>.list-group-item{
+    display: flex;
+    margin: 15px;
+  }
+  .dropdown-menu > .list-group-item:hover{
+    background-color: #ced4da !important;
+    border-radius: 5px !important;
+}
+
+  .form-check{
+    margin: 15px;
+  }
+  .form-check-input:checked{
+    background-color: orangered;
+    border-color: white;
+  }
+  .form-check:hover{
+    background-color: #ced4da;
+    border-radius: 5px;
   }
   .size{
     border: 1px solid black;
   }
+  .size:hover{
+    background-color: #ced4da
+  }
   .select-color{
      margin: 50px;
+  }
+  .search{
+    padding: 10px;
+    width: 500px;
+    border-radius: 5px;
+    border: 1px solid rgb(155, 152, 152);
   }

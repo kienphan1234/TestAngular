@@ -11,22 +11,25 @@
   </div>
   <div class="select"> 
     <div>
-      <div class="custom-select" (click)="toggleSelect()">
-        <div class="select-selected">
-          {{ selectedOption ? 'Fulfillment facility: ' + selectedOption : 'Fulfillment facility: All' }}
-          <i class="bi bi-chevron-down down"></i>
-        </div>
-        <div class="select-items" [ngClass]="{'select-hide': !isSelectOpen}">
-          <div class="select-option" (click)="selectOption(null)">
-            <img src="https://d1ud88wu9m1k4s.cloudfront.net/icons/ic_Tier_All_Location_24x24.svg" alt="All" class="select-option-image">
-            Fulfillment facility: All
-          </div>
-          <div class="select-option" *ngFor="let sku of (productData?.base_sku ?? []) | uniqueLocation" (click)="selectOption(sku)"
-           (change)="onCategoryChange()">
-            <img [src]="sku.location_icon" alt="{{ sku.location_name }}" class="select-option-image">
-            {{ sku.location_name }}
-          </div>
-        </div>
+      <div class="dropdown">
+        <button class="btn  dropdown-toggle size" type="button" id="dropdownMenuButton" (click)="toggleDropdown3()">
+          Select Fulfillment facility
+        </button>
+        <ul class="dropdown-menu" [class.show]="dropdownOpen3" aria-labelledby="dropdownMenuButton">
+          <li *ngFor="let sku of (productData?.base_sku ?? []) | uniqueLocation">
+            <div class="form-check">
+              <input 
+                type="checkbox" 
+                class="form-check-input" 
+                [value]="sku.location_name" 
+                (change)="onCheckboxChange3($event, sku.location_name)" 
+                [checked]="selectedOptionkk.includes(sku.location_name)">
+              <label class="form-check-label">
+                {{  sku.location_name }}
+              </label>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
     <div>
@@ -125,13 +128,21 @@
       </ul>
     </div>
     
+    <div>
+      <input class="search" type="text" placeholder="Enter search keyword..." [(ngModel)]="searchTerm" (input)="filterItems()" />
+    </div>
+    
   </div>
+
+  
   <div class="table-full">
     <div class="card">
-      <p-table [value]="filteredList" [scrollable]="true" 
-      scrollHeight="600px" 
-      [scrollable]="true" class="table">
-          <ng-template pTemplate="header" >
+      <p-table [value]="filteredList"
+      [scrollable]="true" 
+      scrollHeight="410px" 
+      [virtualScroll]="true" 
+      [virtualScrollItemSize]="46">
+          <ng-template pTemplate="header">
             <tr>
               <th *ngIf="showname" rowspan="2" pSortableColumn="location_name" >Fulfillment facility
                 <p-sortIcon field="location_name" />
@@ -153,7 +164,7 @@
               </th>
               <th *ngIf="showship" class="center" colspan="4">Shipping fee </th>
             </tr>
-            <tr *ngIf="showship">
+            <tr *ngIf="showship" class="border-cell">
               <td pSortableColumn="shipping_cost_us" >US
                 <p-sortIcon field="shipping_cost_us" />
               </td>
@@ -168,7 +179,7 @@
               </td>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-sku>
+          <ng-template pTemplate="body" let-sku let-rowIndex="rowIndex">
               <tr>
                 <td *ngIf="showname">
                   <img [src]="sku.location_icon">
