@@ -1,7 +1,7 @@
 <div>
   <div class="title" *ngIf="productData">
     <div class="title-name">
-      {{ productData.display_name}}
+      {{ productData.display_name }}
     </div>
     <div class="title-icon">
       <a class="btn-icon">
@@ -9,23 +9,33 @@
       </a>
     </div>
   </div>
-  <div class="select"> 
+  <div class="select">
     <div>
       <div class="dropdown">
-        <button class="btn  dropdown-toggle size" type="button" id="dropdownMenuButton" (click)="toggleDropdown3()">
+        <button
+          class="btn dropdown-toggle size"
+          type="button"
+          id="dropdownMenuButton"
+          (click)="toggleDropdown3()"
+        >
           Select Fulfillment facility
         </button>
-        <ul class="dropdown-menu" [class.show]="dropdownOpen3" aria-labelledby="dropdownMenuButton">
-          <li *ngFor="let sku of (productData?.base_sku ?? []) | uniqueLocation">
+        <ul
+          class="dropdown-menu"
+          [class.show]="dropdownOpen3"
+          aria-labelledby="dropdownMenuButton"
+        >
+          <li *ngFor="let sku of productData?.base_sku ?? [] | uniqueLocation">
             <div class="form-check">
-              <input 
-                type="checkbox" 
-                class="form-check-input" 
-                [value]="sku.location_name" 
-                (change)="onCheckboxChange3($event, sku.location_name)" 
-                [checked]="selectedOptionkk.includes(sku.location_name)">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [value]="sku.location_name"
+                (change)="onCheckboxChange3($event, sku.location_name)"
+                [checked]="selectedOptionkk.includes(sku.location_name)"
+              />
               <label class="form-check-label">
-                {{  sku.location_name }}
+                {{ sku.location_name }}
               </label>
             </div>
           </li>
@@ -34,18 +44,28 @@
     </div>
     <div>
       <div class="dropdown">
-        <button class="btn  dropdown-toggle size" type="button" id="dropdownMenuButton" (click)="toggleDropdown()">
+        <button
+          class="btn dropdown-toggle size"
+          type="button"
+          id="dropdownMenuButton"
+          (click)="toggleDropdown()"
+        >
           Select Sizes
         </button>
-        <ul class="dropdown-menu" [class.show]="dropdownOpen" aria-labelledby="dropdownMenuButton">
+        <ul
+          class="dropdown-menu"
+          [class.show]="dropdownOpen"
+          aria-labelledby="dropdownMenuButton"
+        >
           <li *ngFor="let option of sizeOptions">
-            <div class="form-check"  *ngFor="let value of option.values">
-              <input 
-                type="checkbox" 
-                class="form-check-input" 
-                [value]="value.id" 
-                (change)="onCheckboxChange($event, value.id)" 
-                [checked]="selectedSize.includes(value.id)">
+            <div class="form-check" *ngFor="let value of option.values">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [value]="value.id"
+                (change)="onCheckboxChange($event, value.id)"
+                [checked]="selectedSize.includes(value.id)"
+              />
               <label class="form-check-label">
                 {{ value.name }}
               </label>
@@ -54,21 +74,31 @@
         </ul>
       </div>
     </div>
-    
+
     <div>
       <div class="dropdown">
-        <button class="btn  dropdown-toggle size" type="button" id="dropdownMenuButton" (click)="toggleDropdown1()">
+        <button
+          class="btn dropdown-toggle size"
+          type="button"
+          id="dropdownMenuButton"
+          (click)="toggleDropdown1()"
+        >
           Select Color
         </button>
-        <ul class="dropdown-menu" [class.show]="dropdownOpen1" aria-labelledby="dropdownMenuButton">
+        <ul
+          class="dropdown-menu"
+          [class.show]="dropdownOpen1"
+          aria-labelledby="dropdownMenuButton"
+        >
           <li *ngFor="let option of sizeOptions1">
-            <div class="form-check"  *ngFor="let value of option.values">
+            <div class="form-check" *ngFor="let value of option.values">
               <input
-                type="checkbox" 
-                class="form-check-input" 
-                [value]="value.id" 
-                (change)="onCheckboxChange2($event, value.id)" 
-                [checked]="selectedSize.includes(value.id)">
+                type="checkbox"
+                class="form-check-input"
+                [value]="value.id"
+                (change)="onCheckboxChange2($event, value.id)"
+                [checked]="selectedSize.includes(value.id)"
+              />
               <label class="form-check-label">
                 {{ value.name }}
               </label>
@@ -77,128 +107,160 @@
         </ul>
       </div>
     </div>
-    
+
     <div class="dropdown">
-      <button class="btn  dropdown-toggle size" type="button" id="dropdownMenuButton" (click)="toggleDropdown2()">
+      <button
+        class="btn dropdown-toggle size"
+        type="button"
+        id="dropdownMenuButton"
+        (click)="toggleDropdown2()"
+      >
         Select header
       </button>
-      <ul  class="dropdown-menu" [class.show]="dropdownOpen2" aria-labelledby="dropdownMenuButton">
+      <ul
+        class="dropdown-menu"
+        [class.show]="dropdownOpen2"
+        aria-labelledby="dropdownMenuButton"
+      >
         <li class="list-group-item">
-          <input class="form-check-input me-1" id="checkbox-fulfillment"  [(ngModel)]="showname"  type="checkbox" value="" aria-label="...">
-          <label for="checkbox-fulfillment">
-            Fulfillment facility
-          </label>
+          <input
+            class="form-check-input me-1"
+            id="checkbox-fulfillment"
+            [(ngModel)]="showname"
+            type="checkbox"
+            value=""
+            aria-label="..."
+          />
+          <label for="checkbox-fulfillment"> Fulfillment facility </label>
         </li>
         <li class="list-group-item">
-          <input class="form-check-input me-1" id="checkbox-size"  [(ngModel)]="showsize"  type="checkbox" value="" aria-label="...">
-          <label for="checkbox-size">
-          Show Size
-          </label>
+          <input
+            class="form-check-input me-1"
+            id="checkbox-size"
+            [(ngModel)]="showsize"
+            type="checkbox"
+            value=""
+            aria-label="..."
+          />
+          <label for="checkbox-size"> Show Size </label>
         </li>
         <li class="list-group-item">
-          <input class="form-check-input me-1" id="checkbox-color" [(ngModel)]="showcolor"  type="checkbox" value="" aria-label="...">
-          <label for="checkbox-color">
-            Show Color
-          </label>
+          <input
+            class="form-check-input me-1"
+            id="checkbox-color"
+            [(ngModel)]="showcolor"
+            type="checkbox"
+            value=""
+            aria-label="..."
+          />
+          <label for="checkbox-color"> Show Color </label>
         </li>
         <li class="list-group-item">
-          <input class="form-check-input me-1" id="checkbox-sku"  [(ngModel)]="showsku"  type="checkbox" value="" aria-label="...">
-          <label for="checkbox-sku">
-          Show SKU
-        </label>
+          <input
+            class="form-check-input me-1"
+            id="checkbox-sku"
+            [(ngModel)]="showsku"
+            type="checkbox"
+            value=""
+            aria-label="..."
+          />
+          <label for="checkbox-sku"> Show SKU </label>
         </li>
         <li class="list-group-item">
-          <input class="form-check-input me-1" id="checkbox-cost"  [(ngModel)]="showBaseCost"  type="checkbox" value="" aria-label="...">
-          <label for="checkbox-cost">
-          Show Base cost
-        </label>
+          <input
+            class="form-check-input me-1"
+            id="checkbox-cost"
+            [(ngModel)]="showBaseCost"
+            type="checkbox"
+            value=""
+            aria-label="..."
+          />
+          <label for="checkbox-cost"> Show Base cost </label>
         </li>
         <li class="list-group-item">
-          <input class="form-check-input me-1" id="checkbox-price"  [(ngModel)]="showSecondPrice"  type="checkbox" value="" aria-label="...">
-          <label for="checkbox-price">
-          Show 2nd price
-        </label>
+          <input
+            class="form-check-input me-1"
+            id="checkbox-price"
+            [(ngModel)]="showSecondPrice"
+            type="checkbox"
+            value=""
+            aria-label="..."
+          />
+          <label for="checkbox-price"> Show 2nd price </label>
         </li>
         <li class="list-group-item">
-          <input class="form-check-input me-1" id="checkbox-fee"   [(ngModel)]="showship"  type="checkbox" value="" aria-label="...">
-          <label for="checkbox-fee">
-          Show Shipping fee
-        </label>
+          <input
+            class="form-check-input me-1"
+            id="checkbox-fee"
+            [(ngModel)]="showship"
+            type="checkbox"
+            value=""
+            aria-label="..."
+          />
+          <label for="checkbox-fee"> Show Shipping fee </label>
         </li>
       </ul>
     </div>
-    
+
     <div>
-      <input class="search" type="text" placeholder="Enter search keyword..." [(ngModel)]="searchTerm" (input)="filterItems()" />
+      <input
+        class="search"
+        type="text"
+        placeholder="Enter search keyword..."
+        [(ngModel)]="searchTerm"
+        (input)="filterItems()"
+      />
     </div>
-    
   </div>
 
-  
   <div class="table-full">
     <div class="card">
-      <p-table [value]="filteredList"
-      [scrollable]="true" 
-      scrollHeight="410px" 
-      [virtualScroll]="true" 
-      [virtualScrollItemSize]="46">
-          <ng-template pTemplate="header">
-            <tr>
-              <th *ngIf="showname" rowspan="2" pSortableColumn="location_name" >Fulfillment facility
-                <p-sortIcon field="location_name" />
-              </th>
-              <th *ngIf="showsize" rowspan="2" pSortableColumn="size_name" >Size
-                <p-sortIcon field="size_name" />
-              </th>
-              <th *ngIf="showcolor" rowspan="2" pSortableColumn="color_name" >Color
-                <p-sortIcon field="color_name" />
-              </th>
-              <th *ngIf="showsku"  rowspan="2" pSortableColumn="sku" >SKU
-                <p-sortIcon field="sku" />
-              </th>
-              <th *ngIf="showBaseCost" rowspan="2" pSortableColumn="base_cost">Base cost
-                <p-sortIcon field="base_cost"  />
-              </th>
-              <th *ngIf="showSecondPrice" rowspan="2" pSortableColumn="second_side_price" >2nd price
-                <p-sortIcon field="second_side_price" />
-              </th>
-              <th *ngIf="showship" class="center" colspan="4">Shipping fee </th>
-            </tr>
-            <tr *ngIf="showship" class="border-cell">
-              <td pSortableColumn="shipping_cost_us" >US
-                <p-sortIcon field="shipping_cost_us" />
-              </td>
-              <td pSortableColumn="shipping_adding_us" >US addition
-                <p-sortIcon field="shipping_adding_us" />
-              </td>
-              <td pSortableColumn="shipping_cost_ww" >WW
-                <p-sortIcon field="shipping_cost_ww" />
-              </td>
-              <td pSortableColumn="shipping_adding_ww">WW addition
-                <p-sortIcon field="shipping_adding_ww" />
-              </td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-sku let-rowIndex="rowIndex">
-              <tr>
-                <td *ngIf="showname">
-                  <img [src]="sku.location_icon">
-                  <span>
-                    {{ sku.location_name }}
-                  </span>
-                </td>
-                <td *ngIf="showsize" >{{ sku.size_name }}</td>
-                <td *ngIf="showcolor">{{ sku.color_name }}</td>
-                <td *ngIf="showsku">{{ sku.sku }}</td>
-                <td *ngIf="showBaseCost">${{ sku.base_cost }}</td>
-                <td *ngIf="showSecondPrice">${{ sku.second_side_price }}</td>
-                <td *ngIf="showship">${{ sku.shipping_cost_us }}</td>
-                <td *ngIf="showship">${{ sku.shipping_adding_us }}</td>
-                <td *ngIf="showship">${{ sku.shipping_cost_ww }}</td>
-                <td *ngIf="showship">${{ sku.shipping_adding_ww }}</td>
-              </tr>
-          </ng-template>
+      <p-table
+        [value]="filteredList"
+        [scrollable]="true"
+        scrollHeight="400px"
+        [rows]="100"
+        [virtualScroll]="true"
+        [virtualScrollItemSize]="46"
+        [lazy]="true"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th *ngIf="showname" rowspan="2">Fulfillment facility</th>
+            <th *ngIf="showsize" rowspan="2">Size</th>
+            <th *ngIf="showcolor" rowspan="2">Color</th>
+            <th *ngIf="showsku" rowspan="2">SKU</th>
+            <th *ngIf="showBaseCost" rowspan="2">Base cost</th>
+            <th *ngIf="showSecondPrice" rowspan="2">2nd price</th>
+            <th *ngIf="showship" class="center" colspan="4">Shipping fee</th>
+          </tr>
+          <tr *ngIf="showship" class="border-cell">
+            <td>US</td>
+            <td>US addition</td>
+            <td>WW</td>
+            <td>WW addition</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-sku let-rowIndex="rowIndex">
+          <tr>
+            <td *ngIf="showname">
+              <img [src]="sku.location_icon" />
+              <span>
+                {{ sku.location_name }}
+              </span>
+            </td>
+            <td *ngIf="showsize">{{ sku.size_name }}</td>
+            <td *ngIf="showcolor">{{ sku.color_name }}</td>
+            <td *ngIf="showsku">{{ sku.sku }}</td>
+            <td *ngIf="showBaseCost">${{ sku.base_cost }}</td>
+            <td *ngIf="showSecondPrice">${{ sku.second_side_price }}</td>
+            <td *ngIf="showship">${{ sku.shipping_cost_us }}</td>
+            <td *ngIf="showship">${{ sku.shipping_adding_us }}</td>
+            <td *ngIf="showship">${{ sku.shipping_cost_ww }}</td>
+            <td *ngIf="showship">${{ sku.shipping_adding_ww }}</td>
+          </tr>
+        </ng-template>
       </p-table>
-  </div>
+    </div>
   </div>
 </div>
