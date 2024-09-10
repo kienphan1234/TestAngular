@@ -1,0 +1,10 @@
+.error-message{
+    text-align: center;
+    background: rgba(254, 252, 232, 0.95);
+    border: solid #fde68a;
+    color: rgb(53, 53, 245);
+    padding: 20px;
+}
+.load{
+   color: #ca8a04;
+}

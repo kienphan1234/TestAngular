@@ -8,7 +8,7 @@ import { catalogue } from '../models/catalogue';
 })
 export class CatalogueService {
 
-  private apiUrl = 'https://gearenhance.s3.us-east-1.amazonaws.com/data.json';
+  private apiUrl = 'assets/data.json';
 
   constructor(private http: HttpClient) { }
 

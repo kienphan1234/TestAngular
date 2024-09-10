@@ -22,7 +22,7 @@ export interface BaseSku {
   size_name: string;
   color_id: string;
   color_name: string;
-  base_cost: string;
+  base_cost: number;
   second_side_price: string;
   default_profit: string;
   size_position: number;

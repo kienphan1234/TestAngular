@@ -33,7 +33,7 @@
 
 .select {
   display: flex;
-  gap: 70px;
+  gap: 50px;
   margin-left: 15px;
   margin-bottom: 20px;
 }
@@ -50,6 +50,7 @@ th,
 td,
 tr {
   color: black;
+  border: 1px solid black;
 }
 
 .table thead th {
@@ -158,17 +159,95 @@ tr {
   border-radius: 5px;
 }
 .size {
-  border: 1px solid black;
+  border: 1px solid #ddd;
 }
 .size:hover {
-  background-color: #ced4da;
+  background-color: #f1f1f1;
 }
 .select-color {
   margin: 50px;
 }
 .search {
   padding: 10px;
+  padding-left: 30px;
   width: 500px;
   border-radius: 5px;
   border: 1px solid rgb(155, 152, 152);
+}
+.search:focus {
+  border-color: #ddd; 
+  box-shadow: 0 0 5px rgb(155, 152, 152); 
+}
+
+.search::placeholder {
+  color: black; 
+  font-size: inherit;
+  
+}
+
+.search:focus {
+  outline: none;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+.icon-search {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #888;
+}
+
+.table-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.viewport {
+  height: 400px; 
+  overflow: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.header-row th, .subheader-row td {
+  position: sticky;
+  background: #f1f1f1; 
+  z-index: 1;
+}
+
+.header-row th {
+  top: 0;
+  z-index: 2;
+}
+
+.subheader-row td {
+  top: 53px; 
+  z-index: 1;
+}
+
+th, td {
+  border: 1px solid #ddd; 
+}
+.up1:hover{
+   color: orange;
+}
+.btn-all{
+   padding: 6px 12px 6px 12px;
+   width: 100%;
+   border: 1px solid #ddd;
+   border-radius: 5px;
+   background-color: white;
+}
+.btn-all:hover{
+  background-color: #f1f1f1;
 }

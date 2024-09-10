@@ -11,10 +11,12 @@ import { CommonModule } from '@angular/common';
 import { UniqueLocationPipe } from '../../core/pipe/unique-location.pipe';
 import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MessageComponent } from '../message/message.component';
 @Component({
   selector: 'app-catalogue',
   standalone: true,
-  imports: [CommonModule, UniqueLocationPipe, FormsModule, TableModule],
+  imports: [CommonModule, UniqueLocationPipe, FormsModule, TableModule,ScrollingModule,MessageComponent],
   templateUrl: './catalogue.component.html',
   styleUrl: './catalogue.component.css',
 })
@@ -25,7 +27,7 @@ export class CatalogueComponent {
   filteredList: any[] = [];
   selectedColor: string[] = [];
   selectedSize: string[] = [];
-  selectedOptionkk: string[] = [];
+  selectedOption: string[] = [];
   showBaseCost: boolean = true;
   showSecondPrice: boolean = true;
   showname: boolean = true;
@@ -38,6 +40,9 @@ export class CatalogueComponent {
   dropdownOpen2: boolean = false;
   dropdownOpen3: boolean = false;
   searchTerm: string = '';
+  sortColumn: string = '';
+ isAscending: boolean = true;
+ errorMessage: string | null = null;
   constructor(private productService: CatalogueService) {}
 
   ngOnInit(): void {
@@ -78,15 +83,15 @@ export class CatalogueComponent {
   }
 
   filterByfacility(): void {
-    if (this.selectedOptionkk && this.selectedOptionkk.length != 0) {
+    if (this.selectedOption && this.selectedOption.length != 0) {
       this.filteredList = this.filteredList.filter((item) =>
-        this.selectedOptionkk.includes(item.location_name.toString())
+        this.selectedOption.includes(item.location_name.toString())
       );
     }
   }
 
   filterByfacilityOnly(): void {
-    this.selectedOptionkk = [];
+    this.selectedOption = [];
     this.filteredList = this.productData?.base_sku ?? [];
     this.filterByfacility();
   }
@@ -134,6 +139,10 @@ export class CatalogueComponent {
       this.selectedSize = this.selectedSize.filter((item) => item !== size);
     }
     this.onCategoryChange();
+    this.dropdownOpen = false;
+  }
+  onCheckboxChange1() {
+    this.dropdownOpen2 = false;
   }
   onCheckboxChange2(event: Event, color: string) {
     const checkbox = event.target as HTMLInputElement;
@@ -143,20 +152,24 @@ export class CatalogueComponent {
       this.selectedColor = this.selectedColor.filter((item) => item !== color);
     }
     this.onCategoryChange();
+    this.dropdownOpen1 = false;
   }
   onCheckboxChange3(event: Event, name: string) {
     const checkbox = event.target as HTMLInputElement;
     if (checkbox.checked) {
-      this.selectedOptionkk.push(name);
+      this.selectedOption.push(name);
     } else {
-      this.selectedOptionkk = this.selectedOptionkk.filter(
+      this.selectedOption = this.selectedOption.filter(
         (item) => item !== name
       );
     }
     this.onCategoryChange();
+    this.dropdownOpen3 = false;
   }
 
   filterItems() {
+    this.filteredList = this.productData?.base_sku ?? [];
+    this.onCategoryChange();
     if (!this.searchTerm.trim()) {
       this.filteredList = this.productData?.base_sku ?? [];
       this.onCategoryChange();
@@ -172,9 +185,66 @@ export class CatalogueComponent {
       });
 
       if (this.filteredList.length === 0) {
-        console.log('404: Không tìm thấy sản phẩm');
-        this.filteredList = [{ sku: 'No products found' }];
+        this.errorMessage = 'Product not found, please re-enter';
+        this.filteredList = [];
+      }else {
+        this.errorMessage = null;
       }
     }
+  }
+
+  sortData(column: string) {
+    if (this.sortColumn === column) {
+      // Nếu người dùng nhấn lại vào cùng một cột, đổi thứ tự sắp xếp (tăng dần/giảm dần)
+      this.isAscending = !this.isAscending;
+    } else {
+      // Nếu chuyển sang cột mới, chỉ thay đổi cột sắp xếp mà không sắp xếp dữ liệu
+      this.sortColumn = column;
+      this.isAscending = true; // Đặt lại thứ tự sắp xếp mặc định
+    }
+  
+    // Sắp xếp `filteredList` theo cột đã chọn
+    this.filteredList.sort((a, b) => {
+      let valA = a[column];
+      let valB = b[column];
+  
+      // Xử lý nếu giá trị là chuỗi
+      if (typeof valA === 'string' && typeof valB === 'string') {
+        // Chuyển đổi thành chữ thường để so sánh không phân biệt chữ hoa chữ thường
+        valA = valA.toLowerCase();
+        valB = valB.toLowerCase();
+  
+        // Kiểm tra nếu chuỗi có chứa ký hiệu tiền tệ
+        if (valA.startsWith('$')) valA = valA.substring(1);
+        if (valB.startsWith('$')) valB = valB.substring(1);
+  
+        // Kiểm tra nếu chuỗi sau khi loại bỏ ký hiệu tiền tệ có thể chuyển thành số
+        const numA = parseFloat(valA);
+        const numB = parseFloat(valB);
+  
+        if (!isNaN(numA) && !isNaN(numB)) {
+          // Nếu cả hai giá trị đều có thể chuyển thành số, so sánh chúng như số
+          return this.isAscending ? numA - numB : numB - numA;
+        } else {
+          // Nếu không thể chuyển thành số, so sánh như chuỗi
+          if (valA < valB) {
+            return this.isAscending ? -1 : 1;
+          } else if (valA > valB) {
+            return this.isAscending ? 1 : -1;
+          } else {
+            return 0;
+          }
+        }
+      }
+  
+      return 0;
+    });
+  }
+
+  clickAll() {
+    this.selectedSize = [];
+    this.selectedColor = [];
+    this.selectedOption = [];
+    this.onCategoryChange();
   }
 }
