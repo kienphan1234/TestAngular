@@ -16,7 +16,14 @@ import { MessageComponent } from '../message/message.component';
 @Component({
   selector: 'app-catalogue',
   standalone: true,
-  imports: [CommonModule, UniqueLocationPipe, FormsModule, TableModule,ScrollingModule,MessageComponent],
+  imports: [
+    CommonModule,
+    UniqueLocationPipe,
+    FormsModule,
+    TableModule,
+    ScrollingModule,
+    MessageComponent,
+  ],
   templateUrl: './catalogue.component.html',
   styleUrl: './catalogue.component.css',
 })
@@ -41,8 +48,8 @@ export class CatalogueComponent {
   dropdownOpen3: boolean = false;
   searchTerm: string = '';
   sortColumn: string = '';
- isAscending: boolean = true;
- errorMessage: string | null = null;
+  isAscending: boolean = true;
+  errorMessage: string | null = null;
   constructor(private productService: CatalogueService) {}
 
   ngOnInit(): void {
@@ -159,25 +166,22 @@ export class CatalogueComponent {
     if (checkbox.checked) {
       this.selectedOption.push(name);
     } else {
-      this.selectedOption = this.selectedOption.filter(
-        (item) => item !== name
-      );
+      this.selectedOption = this.selectedOption.filter((item) => item !== name);
     }
     this.onCategoryChange();
     this.dropdownOpen3 = false;
   }
 
+
   filterItems() {
-    this.filteredList = this.productData?.base_sku ?? [];
-    this.onCategoryChange();
+    this.filterList();
     if (!this.searchTerm.trim()) {
-      this.filteredList = this.productData?.base_sku ?? [];
-      this.onCategoryChange();
-    } else {
+      this.filterList();
+    }else{
       const searchKeywords = this.searchTerm
         .toLowerCase()
         .split(' ')
-        .filter(Boolean);
+        .filter((x) => x.trim());
 
       this.filteredList = this.filteredList.filter((item) => {
         const skuLowerCase = item.sku.toLowerCase();
@@ -186,8 +190,7 @@ export class CatalogueComponent {
 
       if (this.filteredList.length === 0) {
         this.errorMessage = 'Product not found, please re-enter';
-        this.filteredList = [];
-      }else {
+      } else {
         this.errorMessage = null;
       }
     }
@@ -202,26 +205,26 @@ export class CatalogueComponent {
       this.sortColumn = column;
       this.isAscending = true; // Đặt lại thứ tự sắp xếp mặc định
     }
-  
+
     // Sắp xếp `filteredList` theo cột đã chọn
     this.filteredList.sort((a, b) => {
       let valA = a[column];
       let valB = b[column];
-  
+
       // Xử lý nếu giá trị là chuỗi
       if (typeof valA === 'string' && typeof valB === 'string') {
         // Chuyển đổi thành chữ thường để so sánh không phân biệt chữ hoa chữ thường
         valA = valA.toLowerCase();
         valB = valB.toLowerCase();
-  
+
         // Kiểm tra nếu chuỗi có chứa ký hiệu tiền tệ
         if (valA.startsWith('$')) valA = valA.substring(1);
         if (valB.startsWith('$')) valB = valB.substring(1);
-  
+
         // Kiểm tra nếu chuỗi sau khi loại bỏ ký hiệu tiền tệ có thể chuyển thành số
         const numA = parseFloat(valA);
         const numB = parseFloat(valB);
-  
+
         if (!isNaN(numA) && !isNaN(numB)) {
           // Nếu cả hai giá trị đều có thể chuyển thành số, so sánh chúng như số
           return this.isAscending ? numA - numB : numB - numA;
@@ -236,7 +239,7 @@ export class CatalogueComponent {
           }
         }
       }
-  
+
       return 0;
     });
   }
@@ -247,4 +250,35 @@ export class CatalogueComponent {
     this.selectedOption = [];
     this.onCategoryChange();
   }
+
+  onCheckboxLabelClick(valueId: string) {
+    if (this.selectedSize.includes(valueId)) {
+      this.selectedSize = this.selectedSize.filter(id => id !== valueId);
+    } else {
+      this.selectedSize.push(valueId);
+    }
+    this.onCategoryChange();
+    this.dropdownOpen = false;
+  }
+
+  onCheckboxLabelClick1(valueId: string) {
+    if (this.selectedColor.includes(valueId)) {
+      this.selectedColor = this.selectedColor.filter(id => id !== valueId);
+    } else {
+      this.selectedColor.push(valueId);
+    }
+    this.onCategoryChange();
+    this.dropdownOpen1 = false;
+  }
+
+  onCheckboxLabelClick2(valueId: string) {
+    if (this.selectedOption.includes(valueId)) {
+      this.selectedOption = this.selectedOption.filter(id => id !== valueId);
+    } else {
+      this.selectedOption.push(valueId);
+    }
+    this.onCategoryChange();
+    this.dropdownOpen3 = false;
+  }
+
 }

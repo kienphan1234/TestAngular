@@ -29,7 +29,7 @@
           aria-labelledby="dropdownMenuButton"
         >
           <li *ngFor="let sku of productData?.base_sku ?? [] | uniqueLocation">
-            <div class="form-check">
+            <div class="form-check" (click)="onCheckboxLabelClick2(sku.location_name)">
               <input
                 type="checkbox"
                 class="form-check-input"
@@ -61,13 +61,14 @@
           aria-labelledby="dropdownMenuButton"
         >
           <li *ngFor="let option of sizeOptions">
-            <div class="form-check" *ngFor="let value of option.values">
+            <div class="form-check" *ngFor="let value of option.values" (click)="onCheckboxLabelClick(value.id)">
               <input
                 type="checkbox"
                 class="form-check-input"
                 [value]="value.id"
                 (change)="onCheckboxChange($event, value.id)"
                 [checked]="selectedSize.includes(value.id)"
+                
               />
               <label class="form-check-label">
                 {{ value.name }}
@@ -94,7 +95,7 @@
           aria-labelledby="dropdownMenuButton"
         >
           <li *ngFor="let option of sizeOptions1">
-            <div class="form-check" *ngFor="let value of option.values">
+            <div class="form-check" *ngFor="let value of option.values" (click)="onCheckboxLabelClick1(value.id)">
               <input
                 type="checkbox"
                 class="form-check-input"
