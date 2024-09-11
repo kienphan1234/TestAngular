@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MessageComponent } from '../message/message.component';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-catalogue',
   standalone: true,
@@ -23,6 +24,7 @@ import { MessageComponent } from '../message/message.component';
     TableModule,
     ScrollingModule,
     MessageComponent,
+    RouterModule
   ],
   templateUrl: './catalogue.component.html',
   styleUrl: './catalogue.component.css',
@@ -66,7 +68,7 @@ export class CatalogueComponent {
         this.sizeOptions1 = this.productData?.options.filter(
           (option) => option.name === 'color'
         );
-        this.filteredList = this.productData?.base_sku ?? [];
+        this.filterList();
       },
     });
   }
@@ -189,7 +191,7 @@ export class CatalogueComponent {
       });
 
       if (this.filteredList.length === 0) {
-        this.errorMessage = 'Product not found, please re-enter';
+        this.errorMessage = 'roduct does not exist';
       } else {
         this.errorMessage = null;
       }

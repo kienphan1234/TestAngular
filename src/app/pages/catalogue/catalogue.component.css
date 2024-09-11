@@ -9,10 +9,16 @@
 }
 
 .title-name {
-  padding-bottom: 10px;
-  font-size: 24px;
-  font-weight: 600 !important;
+  text-align: center;
+  border-radius: 20px;
+  font-size: 40px;
+  color: #2c2c2c;
+  letter-spacing: .05em;
+  text-shadow: 4px 4px 0px #d5d5d5, 7px 7px 0px rgba(0, 0, 0, 0.2);
+  height: 80px;
+  padding-top: 5px;
 }
+
 
 .title-icon {
   margin-left: auto;
@@ -55,7 +61,6 @@ tr {
 
 .table thead th {
   padding-bottom: 20px;
-  font-weight: normal;
 }
 
 .center {
@@ -151,11 +156,11 @@ tr {
   margin: 15px;
 }
 .form-check-input:checked {
-  background-color: orangered;
+  background-color: rgb(145, 145, 145);
   border-color: white;
 }
 .form-check:hover {
-  background-color: #ced4da;
+  background-color: rgb(248, 167, 35);
   border-radius: 5px;
 }
 .size {
@@ -171,7 +176,7 @@ tr {
   padding: 10px;
   padding-left: 30px;
   width: 500px;
-  border-radius: 5px;
+  border-radius: 20px;
   border: 1px solid rgb(155, 152, 152);
 }
 .search:focus {
@@ -200,7 +205,7 @@ tr {
   top: 50%;
   transform: translateY(-50%);
   font-size: 18px;
-  color: #888;
+  color: orange;
 }
 
 .table-container {
@@ -209,8 +214,9 @@ tr {
 }
 
 .viewport {
-  height: 400px; 
+  height: 480px; 
   overflow: auto;
+  border-radius: 50px;
 }
 
 .table {
@@ -223,9 +229,13 @@ tr {
   position: sticky;
   background: #f1f1f1; 
   z-index: 1;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .header-row th {
+  font-weight: bold;
+  font-style: italic;
   top: 0;
   z-index: 2;
 }
@@ -234,20 +244,53 @@ tr {
   top: 53px; 
   z-index: 1;
 }
-
+tbody td{
+   padding: 20px;
+   color: #8b8484;
+   font-weight: 600;
+}
+tbody td:hover{
+   color: black;
+}
 th, td {
-  border: 1px solid #ddd; 
+  border: 3px solid #ddd; 
 }
 .up1:hover{
    color: orange;
 }
 .btn-all{
-   padding: 6px 12px 6px 12px;
-   width: 100%;
-   border: 1px solid #ddd;
-   border-radius: 5px;
-   background-color: white;
+  padding: 6px 12px 6px 12px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 1000ms;
+  font-size: 15px;
+  position: relative;
+  overflow: hidden;
+  outline: 2px solid orange;
 }
 .btn-all:hover{
-  background-color: #f1f1f1;
+  color: #ffffff;
+  transform: scale(1.1);
+  outline: 2px solid orange;
+  box-shadow: 4px 5px 17px -4px orange;
+}
+.btn-all::before
+{
+  content: "";
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: orange;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
+
+}
+.btn-all:hover::before {
+  width: 250%;
 }

@@ -432,7 +432,15 @@
         "size_chart": "{\"image\":\"https://d1ud88wu9m1k4s.cloudfront.net/assets/sizeguide/USG5000.jpg\",\"size\":[\"S\",\"M\",\"L\",\"XL\",\"2XL\",\"3XL\",\"4XL\",\"5XL\"],\"data\":[[{\"in\":\"28\",\"cm\":\"71.1\"},{\"in\":\"36\",\"cm\":\"91.4\"}],[{\"in\":\"29\",\"cm\":\"73.7\"},{\"in\":\"40\",\"cm\":\"101.6\"}],[{\"in\":\"30\",\"cm\":\"76.2\"},{\"in\":\"44\",\"cm\":\"111.8\"}],[{\"in\":\"31\",\"cm\":\"78.7\"},{\"in\":\"48\",\"cm\":\"121.9\"}],[{\"in\":\"32\",\"cm\":\"81.3\"},{\"in\":\"52\",\"cm\":\"132.1\"}],[{\"in\":\"33\",\"cm\":\"83.8\"},{\"in\":\"56\",\"cm\":\"142.2\"}],[{\"in\":\"34\",\"cm\":\"86.4\"},{\"in\":\"60\",\"cm\":\"152.4\"}],[{\"in\":\"35\",\"cm\":\"88.9\"},{\"in\":\"64\",\"cm\":\"162.6\"}]],\"name\":\"Unisex T-Shirt | G5000\",\"column\":[\"Length\",\"Bust\"],\"type\":\"tshirt-2d\",\"image2\":\"\"}",
         "title_suffix": "US",
         "base_cost": "6.55",
-        "base_sku": [
+        "error": {
+            "error": true,
+            "message": "Đã xảy ra lỗi khi lấy dữ liệu. Vui lòng thử lại sau."
+          },
+          "empty": {
+            "data": [],
+            "message": "Không có dữ liệu để hiển thị."
+          },
+         "base_sku": [
             {
                 "id": "6tRFPJak6RxjzW7z",
                 "sku": "USG5000-White-S",
