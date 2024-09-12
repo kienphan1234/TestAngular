@@ -51,7 +51,8 @@ export class CatalogueComponent {
   searchTerm: string = '';
   sortColumn: string = '';
   isAscending: boolean = true;
-  errorMessage: string | null = null;
+  error: string | null = null;
+  success: string | null = null;
   constructor(private productService: CatalogueService) {}
 
   ngOnInit(): void {
@@ -191,9 +192,11 @@ export class CatalogueComponent {
       });
 
       if (this.filteredList.length === 0) {
-        this.errorMessage = 'roduct does not exist';
+        this.error = 'Error-Data';
+        this.success = null;
       } else {
-        this.errorMessage = null;
+        this.error = null;
+        this.success = 'Success-Data';
       }
     }
   }

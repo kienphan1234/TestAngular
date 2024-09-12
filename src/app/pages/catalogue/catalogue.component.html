@@ -321,7 +321,7 @@
             <td *ngIf="showship">${{ sku.shipping_adding_ww }}</td>
         </tbody>
       </table>
-      <app-message [errorMessage]="errorMessage"></app-message>
+      <app-message [error]="error"  [success]="success"></app-message>
     </cdk-virtual-scroll-viewport>   
   </div>
 </div>

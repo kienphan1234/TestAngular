@@ -1,10 +1,24 @@
 .error-message{
+    background: rgba(254, 242, 242, 0.95);
+    border: solid #fecaca;
+    border-width: 1px;
+    color: #dc2626;
     text-align: center;
-    background: rgba(254, 252, 232, 0.95);
-    border: solid #fde68a;
-    color: rgb(53, 53, 245);
-    padding: 20px;
+    padding: 10px;
+    font-weight: 600;
 }
-.load{
-   color: #ca8a04;
+.error{
+   color: #dc2626;
+}
+
+.successr-message{
+    background: rgba(240, 253, 244, 0.95);
+    border: solid #bbf7d0;
+    border-width: 1px;
+    color: #16a34a;
+    padding: 10px;
+    font-weight: 600;
+}
+.success{
+    color: #16a34a;
 }

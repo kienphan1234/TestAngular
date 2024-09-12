@@ -9,5 +9,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './message.component.css'
 })
 export class MessageComponent {
-  @Input() errorMessage: string | null = null;
+  @Input() error: string | null = null;
+  @Input() success: string | null = null;
 }

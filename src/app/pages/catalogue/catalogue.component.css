@@ -43,6 +43,12 @@
   margin-left: 15px;
   margin-bottom: 20px;
 }
+@media (max-width: 600px) {
+  .select{
+    display: grid;
+  }
+}
+
 
 .form-select {
   color: #667085;
@@ -294,3 +300,4 @@ th, td {
 .btn-all:hover::before {
   width: 250%;
 }
+
