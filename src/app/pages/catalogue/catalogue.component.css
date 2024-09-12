@@ -216,6 +216,15 @@ th{
   border-left: 1px solid white;
   border-right: 1px solid white;
 }
+.th1 th {
+  top: 0; 
+  z-index: 3;
+}
+
+.th2 th {
+  top: 40px;
+  z-index: 2;
+}
 thead th {
   position: sticky;
   top: 0;
