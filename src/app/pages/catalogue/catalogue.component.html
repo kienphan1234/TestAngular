@@ -222,83 +222,132 @@
         [(ngModel)]="searchTerm"
         (input)="filterItems()"
       />
+      <p *ngIf="specialCharWarning" class="warning-message">Special characters are not allowed!</p>
     </div>
   </div>
 
-  <div class="table-full">
-    
-    <cdk-virtual-scroll-viewport itemSize="500" class="viewport">
+  <div>
       <table class="table">
-        <thead class="header-row">
+        <thead>
           <tr>
-            <th (click)="sortData('location_name')" *ngIf="showname" rowspan="2">
+            <th *ngIf="showname" rowspan="2">
               Fulfillment facility
-              <i class="bi bi-arrow-down-up up1"></i>
-              <span *ngIf="sortColumn === 'location_name'">{{ isAscending ? '↑' : '↓' }}</span>
+              <i class="bi up1" 
+              [ngClass]="{
+                'bi-arrow-down-up': sortColumn !== 'location_name',
+                'bi-sort-up-alt': sortColumn === 'location_name' && isAscending,
+                'bi-sort-down-alt': sortColumn === 'location_name' && !isAscending
+              }"
+              (click)="sortData('location_name')"></i>
             </th>
 
 
-            <th (click)="sortData('size_name')" *ngIf="showsize" rowspan="2">
+            <th *ngIf="showsize" rowspan="2">
               Size
-              <i class="bi bi-arrow-down-up up1"></i>
-              <span *ngIf="sortColumn === 'size_name'">{{ isAscending ? '↑' : '↓' }}</span>
+              <i class="bi up1" 
+              [ngClass]="{
+                'bi-arrow-down-up': sortColumn !== 'size_name',
+                'bi-sort-up-alt': sortColumn === 'size_name' && isAscending,
+                'bi-sort-down-alt': sortColumn === 'size_name' && !isAscending
+              }"
+              (click)="sortData('size_name')"></i>
             </th>
 
 
-            <th (click)="sortData('color_name')"*ngIf="showcolor" rowspan="2">
+            <th *ngIf="showcolor" rowspan="2">
               Color
-              <i class="bi bi-arrow-down-up up1"></i>
-              <span *ngIf="sortColumn === 'color_name'">{{ isAscending ? '↑' : '↓' }}</span>
+              <i class="bi up1" 
+              [ngClass]="{
+                'bi-arrow-down-up': sortColumn !== 'color_name',
+                'bi-sort-up-alt': sortColumn === 'color_name' && isAscending,
+                'bi-sort-down-alt': sortColumn === 'color_name' && !isAscending
+              }"
+              (click)="sortData('color_name')"></i>
             </th>
 
 
-            <th (click)="sortData('sku')" *ngIf="showsku" rowspan="2">
+            <th *ngIf="showsku" rowspan="2">
               SKU
-              <i class="bi bi-arrow-down-up up1"></i>
-              <span *ngIf="sortColumn === 'sku'">{{ isAscending ? '↑' : '↓' }}</span>
+              <i class="bi up1" 
+              [ngClass]="{
+                'bi-arrow-down-up': sortColumn !== 'sku',
+                'bi-sort-up-alt': sortColumn === 'sku' && isAscending,
+                'bi-sort-down-alt': sortColumn === 'sku' && !isAscending
+              }"
+              (click)="sortData('sku')"></i>
             </th>
 
 
-            <th (click)="sortData('base_cost')" *ngIf="showBaseCost" rowspan="2">
+            <th  *ngIf="showBaseCost" rowspan="2">
               Base cost
-              <i class="bi bi-arrow-down-up up1"></i>
-              <span *ngIf="sortColumn === 'base_cost'">{{ isAscending ? '↑' : '↓' }}</span>
+              <i class="bi up1" 
+              [ngClass]="{
+                'bi-arrow-down-up': sortColumn !== 'base_cost',
+                'bi-sort-up-alt': sortColumn === 'base_cost' && isAscending,
+                'bi-sort-down-alt': sortColumn === 'base_cost' && !isAscending
+              }"
+              (click)="sortData('base_cost')"></i>
             </th>
 
 
-            <th (click)="sortData('second_side_price')" *ngIf="showSecondPrice" rowspan="2">
+            <th *ngIf="showSecondPrice" rowspan="2">
               2nd price
-              <i class="bi bi-arrow-down-up up1"></i>
-              <span *ngIf="sortColumn === 'second_side_price'">{{ isAscending ? '↑' : '↓' }}</span>
+              <i class="bi up1" 
+              [ngClass]="{
+                'bi-arrow-down-up': sortColumn !== 'second_side_price',
+                'bi-sort-up-alt': sortColumn === 'second_side_price' && isAscending,
+                'bi-sort-down-alt': sortColumn === 'second_side_price' && !isAscending
+              }"
+              (click)="sortData('second_side_price')"></i>
             </th>
 
 
             <th *ngIf="showship" class="center" colspan="4">Shipping fee</th>
           </tr>
-          <tr *ngIf="showship" class="subheader-row">
-            <td (click)="sortData('shipping_cost_us')">
+          <tr *ngIf="showship">
+            <th>
               US
-              <i class="bi bi-arrow-down-up up1"></i>
-              <span *ngIf="sortColumn === 'shipping_cost_us'">{{ isAscending ? '↑' : '↓' }}</span>
-            </td>
+              <i class="bi up1" 
+              [ngClass]="{
+                'bi-arrow-down-up': sortColumn !== 'shipping_cost_us',
+                'bi-sort-up-alt': sortColumn === 'shipping_cost_us' && isAscending,
+                'bi-sort-down-alt': sortColumn === 'shipping_cost_us' && !isAscending
+              }"
+              (click)="sortData('shipping_cost_us')"></i>
+            </th>
 
-            <td (click)="sortData('shipping_adding_us')">
+            <th>
               US addition
-              <i class="bi bi-arrow-down-up up1"></i>
-              <span *ngIf="sortColumn === 'shipping_adding_us'">{{ isAscending ? '↑' : '↓' }}</span>
-            </td>
+              <i class="bi up1" 
+              [ngClass]="{
+                'bi-arrow-down-up': sortColumn !== 'shipping_adding_us',
+                'bi-sort-up-alt': sortColumn === 'shipping_adding_us' && isAscending,
+                'bi-sort-down-alt': sortColumn === 'shipping_adding_us' && !isAscending
+              }"
+               (click)="sortData('shipping_adding_us')"></i>
+            </th>
 
-            <td (click)="sortData('shipping_cost_ww')">
+            <th>
               WW
-              <i class="bi bi-arrow-down-up up1"></i>
-              <span *ngIf="sortColumn === 'shipping_cost_ww'">{{ isAscending ? '↑' : '↓' }}</span>
-            </td>
+              <i class="bi up1" 
+              [ngClass]="{
+                'bi-arrow-down-up': sortColumn !== 'shipping_cost_ww',
+                'bi-sort-up-alt': sortColumn === 'shipping_cost_ww' && isAscending,
+                'bi-sort-down-alt': sortColumn === 'shipping_cost_ww' && !isAscending
+              }"
+                (click)="sortData('shipping_cost_ww')"></i>
+            </th>
 
-            <td (click)="sortData('shipping_adding_ww')">
+            <th>
               WW addition
-              <i class="bi bi-arrow-down-up up1"></i>
-              <span *ngIf="sortColumn === 'shipping_adding_ww'">{{ isAscending ? '↑' : '↓' }}</span>
-            </td>
+              <i class="bi up1" 
+              [ngClass]="{
+                'bi-arrow-down-up': sortColumn !== 'shipping_adding_ww',
+                'bi-sort-up-alt': sortColumn === 'shipping_adding_ww' && isAscending,
+                'bi-sort-down-alt': sortColumn === 'shipping_adding_ww' && !isAscending
+              }"
+                (click)="sortData('shipping_adding_ww')"></i>
+            </th>
 
           </tr>
         </thead>
@@ -321,8 +370,7 @@
             <td *ngIf="showship">${{ sku.shipping_adding_ww }}</td>
         </tbody>
       </table>
-      <app-message [error]="error"  [success]="success"></app-message>
-    </cdk-virtual-scroll-viewport>   
+      <app-message [error]="error"  [success]="success"></app-message> 
   </div>
 </div>
 

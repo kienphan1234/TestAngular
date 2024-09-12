@@ -53,6 +53,7 @@ export class CatalogueComponent {
   isAscending: boolean = true;
   error: string | null = null;
   success: string | null = null;
+  specialCharWarning: boolean = false;
   constructor(private productService: CatalogueService) {}
 
   ngOnInit(): void {
@@ -177,6 +178,8 @@ export class CatalogueComponent {
 
 
   filterItems() {
+    const specialCharRegex = /[^a-zA-Z0-9\s-]/;
+    this.specialCharWarning = specialCharRegex.test(this.searchTerm);
     this.filterList();
     if (!this.searchTerm.trim()) {
       this.filterList();
@@ -191,7 +194,7 @@ export class CatalogueComponent {
         return searchKeywords.some((keyword) => skuLowerCase.includes(keyword));
       });
 
-      if (this.filteredList.length === 0) {
+      if (this.filteredList.length === 0 ) {
         this.error = 'Error-Data';
         this.success = null;
       } else {
