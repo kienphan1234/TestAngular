@@ -181,6 +181,8 @@ export class CatalogueComponent {
     const specialCharRegex = /[^a-zA-Z0-9\s-]/;
     this.specialCharWarning = specialCharRegex.test(this.searchTerm);
     this.filterList();
+    this.error = null;
+    this.success = 'Success-Data';
     if (!this.searchTerm.trim()) {
       this.filterList();
     }else{
