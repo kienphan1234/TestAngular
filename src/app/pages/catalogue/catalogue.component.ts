@@ -14,6 +14,7 @@ import { TableModule } from 'primeng/table';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MessageComponent } from '../message/message.component';
 import { RouterModule } from '@angular/router';
+import { LazyLoadEvent } from 'primeng/api';
 @Component({
   selector: 'app-catalogue',
   standalone: true,
@@ -54,6 +55,9 @@ export class CatalogueComponent {
   error: string | null = null;
   success: string | null = null;
   specialCharWarning: boolean = false;
+  items = 2000;  // Số phần tử
+  startitems = 0;     // Vị trí bắt đầu
+  enditems = this.items; // Vị trí kết thúc
   constructor(private productService: CatalogueService) {}
 
   ngOnInit(): void {
@@ -290,5 +294,30 @@ export class CatalogueComponent {
     this.onCategoryChange();
     this.dropdownOpen3 = false;
   }
+  
 
+  onScroll(event: any) {
+    /*scrollTop: Vị trí hiện tại của cuộn.
+      scrollHeight: Tổng chiều cao của nội dung.
+      clientHeight: Chiều cao của vùng nhìn thấy được.
+    */
+    const scrollTop = event.target.scrollTop;
+    const scrollHeight = event.target.scrollHeight;
+    const clientHeight = event.target.clientHeight;
+
+    // Kiểm tra khi gần đến cuối chiều cao hiện tại của bảng
+    if (scrollTop + clientHeight >= scrollHeight - 10) {
+      this.loadMoreItems();
+    }
+  }
+
+  loadMoreItems() {
+   // Chỉ tải thêm nếu chưa đến phần tử cuối cùng
+   if (this.enditems < this.filteredList.length) {
+    // Cập nhật startIndex và endIndex nhưng đảm bảo không vượt quá chiều dài của danh sách
+    this.startitems = this.enditems; 
+    this.enditems = Math.min(this.enditems + this.items, this.filteredList.length);
+    this.filteredList = this.filteredList.slice(this.startitems, this.enditems);
+   }
+  }
 }

@@ -243,6 +243,11 @@ tbody td:hover{
    color: white;
 }
 
+.table-container {
+  height: 400px; /* Chiều cao của bảng */
+  overflow-y: scroll; /* Kích hoạt cuộn dọc */
+}
+
 .up1{
   cursor: pointer;
   padding: 10px; 
